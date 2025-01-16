@@ -19,7 +19,7 @@ class SerialPortService(val firebaseService: FirebaseService) {
 
     fun getSerialPorts(): Array<out SerialPort>? {
         return SerialPort.getCommPorts().also {
-            log.info { this.getSerialPorts() }
+            log.info { it }
         }
     }
 
@@ -66,7 +66,7 @@ class SerialPortService(val firebaseService: FirebaseService) {
                                 .forEach {
                                     val temperature = it.toDouble()
                                     if (temperature in (tempTemp - 0.3)..(tempTemp + 0.3)) {
-                                        log.info { "Temperature $temperature is the same as the previous one. Skipping value." }
+                                        log.info { "Temperature $temperature is the same as/close to the previous one. Skipping value." }
                                         return@forEach
                                     } else {
                                         tempTemp = temperature
